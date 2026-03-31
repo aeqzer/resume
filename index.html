@@ -1,397 +1,359 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Resume / Резюме / Түйіндеме</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
-  <style>
-    :root {
-      --bg: #0e0e0e; --surface: #171717; --border: #2a2a2a;
-      --accent: #c8a96e; --accent2: #e8c99e; --text: #e8e4dc; --muted: #888; --tag-bg: #1f1f1f;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-weight: 300; min-height: 100vh; padding: 2rem 1rem 4rem; }
-    .lang-bar { display: flex; justify-content: flex-end; gap: .5rem; max-width: 800px; margin: 0 auto 2.5rem; }
-    .lang-btn { background: none; border: 1px solid var(--border); color: var(--muted); font-family: 'DM Sans', sans-serif; font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; padding: .4rem .9rem; cursor: pointer; border-radius: 2px; transition: all .2s; }
-    .lang-btn:hover { border-color: var(--accent); color: var(--accent); }
-    .lang-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(200,169,110,.08); }
-    .card { max-width: 800px; margin: 0 auto; background: var(--surface); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; animation: fadeIn .5s ease both; }
-    @keyframes fadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
-    .header { padding: 3rem 3rem 2rem; border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
-    .header::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--accent), var(--accent2), transparent); }
-    .photo-wrap { float: right; margin: 0 0 1rem 2rem; }
-    .photo-wrap img { width: 110px; height: 110px; object-fit: cover; object-position: center top; border-radius: 2px; border: 2px solid var(--border); display: block; }
-    .name { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; line-height: 1.1; letter-spacing: -.01em; color: var(--text); }
-    .title { margin-top: .6rem; font-size: 1rem; color: var(--accent); letter-spacing: .08em; text-transform: uppercase; font-weight: 400; }
-    .contacts { margin-top: 1.4rem; display: flex; flex-wrap: wrap; gap: .6rem 1.6rem; font-size: .85rem; color: var(--muted); }
-    .contacts a { color: var(--muted); text-decoration: none; transition: color .2s; }
-    .contacts a:hover { color: var(--accent); }
-    .body { padding: 2.5rem 3rem; }
-    .section { margin-bottom: 2.4rem; }
-    .section:last-child { margin-bottom: 0; }
-    .section-title { font-family: 'Playfair Display', serif; font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.2rem; display: flex; align-items: center; gap: .8rem; }
-    .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-    .about-text { font-size: .95rem; line-height: 1.8; color: #ccc; }
-    .job { margin-bottom: 1.6rem; padding-bottom: 1.6rem; border-bottom: 1px solid var(--border); }
-    .job:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-    .job-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: .3rem; }
-    .job-company { font-weight: 500; font-size: 1rem; }
-    .job-period { font-size: .8rem; color: var(--accent); letter-spacing: .05em; white-space: nowrap; }
-    .job-role { font-size: .85rem; color: var(--muted); margin-top: .25rem; font-style: italic; }
-    .job-desc { margin-top: .7rem; font-size: .9rem; line-height: 1.75; color: #bbb; }
-    .edu { margin-bottom: 1rem; }
-    .edu-school { font-weight: 500; font-size: .95rem; }
-    .edu-detail { font-size: .85rem; color: var(--muted); margin-top: .2rem; }
-    .skills-grid { display: flex; flex-wrap: wrap; gap: .5rem; }
-    .skill-tag { background: var(--tag-bg); border: 1px solid var(--border); color: var(--text); font-size: .8rem; padding: .3rem .75rem; border-radius: 2px; letter-spacing: .04em; transition: border-color .2s, color .2s; }
-    .skill-tag:hover { border-color: var(--accent); color: var(--accent); }
-    .lang-list { display: flex; flex-direction: column; gap: .7rem; }
-    .lang-item { display: flex; align-items: center; gap: 1rem; font-size: .9rem; }
-    .lang-name { width: 120px; flex-shrink: 0; }
-    .lang-level { color: var(--muted); font-size: .8rem; flex: 1; }
-    .lang-dots { display: flex; gap: 4px; }
-    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); transition: background .2s; }
-    .dot.filled { background: var(--accent); }
-    .lang-content { display: none; }
-    .lang-content.active { display: block; }
-    @media (max-width: 600px) { .header, .body { padding: 1.8rem 1.4rem; } .job-header { flex-direction: column; } }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bakhtiyar Maratuly \u2014 Resume</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Unbounded:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e0e;
+    --surface: #161616;
+    --border: #2a2a2a;
+    --accent: #c8f135;
+    --accent2: #3dffa0;
+    --text: #e8e8e8;
+    --muted: #888;
+    --tag-bg: #1e1e1e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    font-weight: 300;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Lang switcher */
+  .lang-bar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: flex-end;
+    gap: 2px;
+    padding: 12px 32px;
+    background: rgba(14,14,14,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .lang-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    padding: 6px 14px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    text-transform: uppercase;
+  }
+
+  .lang-btn:hover, .lang-btn.active {
+    background: var(--accent);
+    color: #000;
+    border-color: var(--accent);
+  }
+
+  /* Page */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 100px 32px 80px;
+  }
+
+  /* Header */
+  .header {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 40px;
+    align-items: start;
+    margin-bottom: 60px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--border);
+    filter: grayscale(20%);
+  }
+
+  .header-info {}
+
+  .name {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(28px, 4vw, 42px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+  }
+
+  .title {
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .contacts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .contacts a {
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .contacts a:hover { color: var(--accent); }
+
+  /* Sections */
+  .section {
+    margin-bottom: 52px;
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* About */
+  .about-text {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #bbb;
+    max-width: 680px;
+  }
+
+  /* Experience */
+  .job {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 24px;
+    margin-bottom: 36px;
+    padding-bottom: 36px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .job:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+  .job-meta {
+    padding-top: 2px;
+  }
+
+  .job-period {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    line-height: 1.6;
+  }
+
+  .job-company {
+    font-size: 11px;
+    color: var(--accent2);
+    margin-top: 4px;
+    letter-spacing: 0.05em;
+  }
+
+  .job-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+  }
+
+  .job-desc {
+    font-size: 13px;
+    line-height: 1.75;
+    color: #aaa;
+  }
+
+  .job-bullets {
+    margin-top: 8px;
+    padding-left: 0;
+    list-style: none;
+  }
+
+  .job-bullets li {
+    font-size: 13px;
+    line-height: 1.75;
+    color: #aaa;
+    padding-left: 16px;
+    position: relative;
+    margin-bottom: 4px;
+  }
+
+  .job-bullets li::before {
+    content: '\u2192';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 11px;
+    top: 2px;
+  }
+
+  /* Education */
+  .edu-item {
+    margin-bottom: 28px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .edu-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+  .edu-school {
+    font-family: 'DM Serif Display', serif;
+    font-size: 17px;
+    margin-bottom: 4px;
+  }
+
+  .edu-degree {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+
+  .edu-year {
+    font-size: 11px;
+    color: var(--accent);
+    margin-top: 4px;
+  }
+
+  /* Skills */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .skill-group {}
+
+  .skill-group-title {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .tag {
+    font-size: 11px;
+    padding: 4px 10px;
+    border: 1px solid var(--border);
+    color: #ccc;
+    letter-spacing: 0.05em;
+    transition: all 0.2s;
+  }
+
+  .tag:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* Languages */
+  .lang-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .lang-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 340px;
+  }
+
+  .lang-name {
+    font-size: 13px;
+    color: #ccc;
+  }
+
+  .lang-level {
+    font-size: 11px;
+    color: var(--accent2);
+    letter-spacing: 0.08em;
+  }
+
+  .lang-bar-track {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+    margin: 0 16px;
+    position: relative;
+  }
+
+  .lang-bar-fill {
+    height: 100%;
+    background: var(--accent);
+    position: absolute;
+    left: 0;
+  }
+
+  /* Animate on load */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(16px);
+    animation: fadeUp 0.5s ease forwards;
+  }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .header { animation-delay: 0.05s; }
+  .section:nth-child(1) { animation-delay: 0.1s; }
+  .section:nth-child(2) { animation-delay: 0.15s; }
+  .section:nth-child(3) { animation-delay: 0.2s; }
+  .section:nth-child(4) { animation-delay: 0.25s; }
+  .section:nth-child(5) { animation-delay: 0.3s; }
+
+  @media (max-width: 600px) {
+    .container { padding: 88px 20px 60px; }
+    .header { grid-template-columns: 1fr; gap: 20px; }
+    .job { grid-template-columns: 1fr; gap: 8px; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .lang-bar { padding: 12px 16px; }
+    .lang-btn { padding: 5px 10px; }
+  }
+</style>
 </head>
 <body>
-
-  <div class="lang-bar">
-    <button class="lang-btn active" id="btn-ru" onclick="switchLang('ru')">RU</button>
-    <button class="lang-btn" id="btn-en" onclick="switchLang('en')">EN</button>
-    <button class="lang-btn" id="btn-kz" onclick="switchLang('kz')">KZ</button>
-  </div>
-
-  <div class="card">
-
-    <!-- ══ РУССКИЙ ══ -->
-    <div class="lang-content active" id="content-ru">
-      <div class="header">
-        <div class="photo-wrap"><img src="https://media.licdn.com/dms/image/v2/D4E03AQFCYvwVpDhSzw/profile-displayphoto-scale_400_400/B4EZfLuxtnHsAg-/0/1751469727918?e=1774483200&v=beta&t=RIuKq3VSSrsYePjrJG-YSt3kYNPUljnYGC1MXyUOuYM" alt="Фото"></div>
-        <div class="name">Бахтияр Маратулы</div>
-        <div class="title">DevSecOps инженер · Историк</div>
-        <div class="contacts">
-          <span>📍 Уральск, Казахстан</span>
-          <a href="mailto:bakhtiyarmaratuly@gmail.com">bakhtiyarmaratuly@gmail.com</a>
-          <a href="tel:+77001234567">+7 778 244-87-96</a>
-          <a href="https://www.linkedin.com/in/bakhtiyar-malikov-8a2810370?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">LinkedIn</a>
-        </div>
-      </div>
-      <div class="body">
-
-        <div class="section">
-          <div class="section-title">Обо мне</div>
-          <p class="about-text">Меня зовут Бахтияр. Я имею образование в области кибербезопасности и магистратуру по истории, что сформировало у меня междисциплинарный аналитический подход к работе с информацией. Обладаю развитым системным и критическим мышлением, умею анализировать сложные процессы, выявлять закономерности и принимать взвешенные решения.<br><br>Имею опыт работы с информационными системами, анализом данных и информационной безопасностью, а также навыки исследовательской и преподавательской деятельности. Способен быстро осваивать новые технологии и применять их на практике.</p>
-        </div>
-
-        <div class="section">
-          <div class="section-title">Опыт работы</div>
-          <div class="job">
-            <div class="job-header">
-              <div class="job-company">JAS Education</div>
-              <div class="job-period">Апрель 2025 — Июнь 2025</div>
-            </div>
-            <div class="job-role">Менеджер по продажам</div>
-            <div class="job-desc">Проводил холодные и горячие звонки и продвигал образовательные программы для детей.</div>
-          </div>
-          <div class="job">
-            <div class="job-header">
-              <div class="job-company">MSSP Global</div>
-              <div class="job-period">Июнь 2025 — Сентябрь 2025</div>
-            </div>
-            <div class="job-role">IT Аудитор</div>
-            <div class="job-desc">Консультирование акимата Астаны и связанных с ними компаний.</div>
-          </div>
-          <div class="job">
-            <div class="job-header">
-              <div class="job-company">KiberOne</div>
-              <div class="job-period">Октябрь 2025 — н.в.</div>
-            </div>
-            <div class="job-role">IT Преподаватель</div>
-            <div class="job-desc">Обучение студентов всем видам IT-языков и приложений.</div>
-          </div>
-        </div>
-
-        <div class="section">
-          <div class="section-title">Образование</div>
-          <div class="edu">
-            <div class="edu-school">Astana IT University</div>
-            <div class="edu-detail">Бакалавр. Кибербезопасность · 2022</div>
-          </div>
-          <div class="edu" style="margin-top:.8rem">
-            <div class="edu-school">Западно-Казахстанский университет имени М. Утемисова</div>
-            <div class="edu-detail">Магистр истории · 2025</div>
-          </div>
-        </div>
-
-        <div class="section">
-          <div class="section-title">Навыки</div>
-          <div class="skills-grid">
-            <span class="skill-tag">Информационные технологии</span>
-            <span class="skill-tag">Информационная безопасность</span>
-            <span class="skill-tag">Менеджмент</span>
-            <span class="skill-tag">Критическое мышление</span>
-            <span class="skill-tag">Монтаж</span>
-            <span class="skill-tag">Полиглот</span>
-            <span class="skill-tag">Академическое письмо</span>
-            <span class="skill-tag">Microsoft Office</span>
-            <span class="skill-tag">История</span>
-            <span class="skill-tag">CSS</span>
-            <span class="skill-tag">HTML</span>
-            <span class="skill-tag">Python</span>
-            <span class="skill-tag">JavaScript</span>
-          </div>
-        </div>
-
-        <div class="section">
-          <div class="section-title">Языки</div>
-          <div class="lang-list">
-            <div class="lang-item">
-              <div class="lang-name">Казахский</div>
-              <div class="lang-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div></div>
-              <div class="lang-level">Родной</div>
-            </div>
-            <div class="lang-item">
-              <div class="lang-name">Русский</div>
-              <div class="lang-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div></div>
-              <div class="lang-level">Свободно</div>
-            </div>
-            <div class="lang-item">
-              <div class="lang-name">Английский</div>
-              <div class="lang-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div></div>
-              <div class="lang-level">Профессиональный (C1)</div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div><!-- /ru -->
-
-
-    <!-- ══ ENGLISH ══ -->
-    <div class="lang-content" id="content-en">
-      <div class="header">
-        <div class="photo-wrap"><img src="https://media.licdn.com/dms/image/v2/D4E03AQFCYvwVpDhSzw/profile-displayphoto-scale_400_400/B4EZfLuxtnHsAg-/0/1751469727918?e=1774483200&v=beta&t=RIuKq3VSSrsYePjrJG-YSt3kYNPUljnYGC1MXyUOuYM" alt="Photo"></div>
-        <div class="name">Bakhtiyar Maratuly</div>
-        <div class="title">DevSecOps engineer · Historian</div>
-        <div class="contacts">
-          <span>📍 Oral, Kazakhstan</span>
-          <a href="mailto:bakhtiyarmaratuly@gmail.com">bakhtiyarmaratuly@gmail.com</a>
-          <a href="tel:+77782448796">+7 778 244-87-96</a>
-          <a href="https://www.linkedin.com/in/bakhtiyar-malikov-8a2810370?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">LinkedIn</a>
-        </div>
-      </div>
-      <div class="body">
-
-        <div class="section">
-          <div class="section-title">About Me</div>
-          <p class="about-text">My name is Bakhtiyar. I hold a degree in cybersecurity and a master's in history, which has shaped my interdisciplinary and analytical approach to working with information. I have strong systems thinking and critical reasoning skills — I can analyze complex processes, identify patterns, and make well-informed decisions.<br><br>I have hands-on experience with information systems, data analysis, and information security, as well as research and teaching skills. I adapt quickly to new technologies and apply them effectively in practice.</p>
-        </div>
-
-        <div class="section">
-          <div class="section-title">Work Experience</div>
-          <div class="job">
-            <div class="job-header">
-              <div class="job-company">JAS Education</div>
-              <div class="job-period">April 2025 — June 2025</div>
-            </div>
-            <div class="job-role">Sales Manager</div>
-            <div class="job-desc">Conducted cold and warm calls and promoted educational programs for children.</div>
-          </div>
-          <div class="job">
-            <div class="job-header">
-              <div class="job-company">MSSP Global</div>
-              <div class="job-period">June 2025 — September 2025</div>
-            </div>
-            <div class="job-role">IT Auditor</div>
-            <div class="job-desc">Provided consulting services to the Astana city administration and affiliated companies.</div>
-          </div>
-          <div class="job">
-            <div class="job-header">
-              <div class="job-company">KiberOne</div>
-              <div class="job-period">October 2025 — Present</div>
-            </div>
-            <div class="job-role">IT Instructor</div>
-            <div class="job-desc">Teaching students all types of IT languages and applications.</div>
-          </div>
-        </div>
-
-        <div class="section">
-          <div class="section-title">Education</div>
-          <div class="edu">
-            <div class="edu-school">Astana IT University</div>
-            <div class="edu-detail">Bachelor's. Cybersecurity · 2022</div>
-          </div>
-          <div class="edu" style="margin-top:.8rem">
-            <div class="edu-school">West Kazakhstan University named after M. Utemisov</div>
-            <div class="edu-detail">Master's in History · 2025</div>
-          </div>
-        </div>
-
-        <div class="section">
-          <div class="section-title">Skills</div>
-          <div class="skills-grid">
-            <span class="skill-tag">Information Technology</span>
-            <span class="skill-tag">Information Security</span>
-            <span class="skill-tag">Management</span>
-            <span class="skill-tag">Critical Thinking</span>
-            <span class="skill-tag">Video Editing</span>
-            <span class="skill-tag">Polyglot</span>
-            <span class="skill-tag">Academic Writing</span>
-            <span class="skill-tag">Microsoft Office</span>
-            <span class="skill-tag">History</span>
-            <span class="skill-tag">CSS</span>
-            <span class="skill-tag">HTML</span>
-            <span class="skill-tag">Python</span>
-            <span class="skill-tag">JavaScript</span>
-          </div>
-        </div>
-
-        <div class="section">
-          <div class="section-title">Languages</div>
-          <div class="lang-list">
-            <div class="lang-item">
-              <div class="lang-name">Kazakh</div>
-              <div class="lang-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div></div>
-              <div class="lang-level">Native</div>
-            </div>
-            <div class="lang-item">
-              <div class="lang-name">Russian</div>
-              <div class="lang-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div></div>
-              <div class="lang-level">Fluent</div>
-            </div>
-            <div class="lang-item">
-              <div class="lang-name">English</div>
-              <div class="lang-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div></div>
-              <div class="lang-level">Professional (С1)</div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div><!-- /en -->
-
-
-    <!-- ══ ҚАЗАҚША ══ -->
-    <div class="lang-content" id="content-kz">
-      <div class="header">
-        <div class="photo-wrap"><img src="https://media.licdn.com/dms/image/v2/D4E03AQFCYvwVpDhSzw/profile-displayphoto-scale_400_400/B4EZfLuxtnHsAg-/0/1751469727918?e=1774483200&v=beta&t=RIuKq3VSSrsYePjrJG-YSt3kYNPUljnYGC1MXyUOuYM" alt="Profile Photo"></div>
-        <div class="name">Бақтияр Маратұлы</div>
-        <div class="title">DevSecOps инженері · Тарихшы</div>
-        <div class="contacts">
-          <span>📍 Орал, Қазақстан</span>
-          <a href="mailto:bakhtiyarmaratuly@gmail.com">bakhtiyarmaratuly@gmail.com</a>
-          <a href="tel:+77782448796">+7 778 244-87-96</a>
-          <a href="https://www.linkedin.com/in/bakhtiyar-malikov-8a2810370?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">LinkedIn</a>
-        </div>
-      </div>
-      <div class="body">
-
-        <div class="section">
-          <div class="section-title">Өзім туралы</div>
-          <p class="about-text">Менің атым Бақтияр. Мен киберқауіпсіздік саласында бакалавр және тарих бойынша магистр дәрежесіне иемін, бұл маған ақпаратпен жұмыс істеуде пәнаралық аналитикалық көзқарас қалыптастырды. Жүйелік және сыни ойлау қабілетім жоғары — күрделі процестерді талдай аламын, заңдылықтарды анықтаймын және негізделген шешімдер қабылдаймын.<br><br>Ақпараттық жүйелермен, деректерді талдаумен және ақпараттық қауіпсіздікпен жұмыс тәжірибем бар, сондай-ақ зерттеу және оқыту дағдыларым қалыптасқан. Жаңа технологияларды тез меңгеріп, оларды тәжірибеде тиімді қолданамын.</p>
-        </div>
-
-        <div class="section">
-          <div class="section-title">Жұмыс тәжірибесі</div>
-          <div class="job">
-            <div class="job-header">
-              <div class="job-company">JAS Education</div>
-              <div class="job-period">Сәуір 2025 — Маусым 2025</div>
-            </div>
-            <div class="job-role">Сату менеджері</div>
-            <div class="job-desc">Суық және жылы қоңыраулар жасап, балаларға арналған білім беру бағдарламаларын насихаттадым.</div>
-          </div>
-          <div class="job">
-            <div class="job-header">
-              <div class="job-company">MSSP Global</div>
-              <div class="job-period">Маусым 2025 — Қыркүйек 2025</div>
-            </div>
-            <div class="job-role">IT Аудитор</div>
-            <div class="job-desc">Астана қалалық әкімдігі мен оған байланысты компанияларға консалтингтік қызметтер көрсеттім.</div>
-          </div>
-          <div class="job">
-            <div class="job-header">
-              <div class="job-company">KiberOne</div>
-              <div class="job-period">Қазан 2025 — қазір</div>
-            </div>
-            <div class="job-role">IT Оқытушы</div>
-            <div class="job-desc">Студенттерге барлық IT тілдері мен қосымшаларды үйретемін.</div>
-          </div>
-        </div>
-
-        <div class="section">
-          <div class="section-title">Білім</div>
-          <div class="edu">
-            <div class="edu-school">Astana IT University</div>
-            <div class="edu-detail">Бакалавр. Киберқауіпсіздік · 2022</div>
-          </div>
-          <div class="edu" style="margin-top:.8rem">
-            <div class="edu-school">М. Өтемісов атындағы Батыс Қазақстан университеті</div>
-            <div class="edu-detail">Тарих магистрі · 2025</div>
-          </div>
-        </div>
-
-        <div class="section">
-          <div class="section-title">Дағдылар</div>
-          <div class="skills-grid">
-            <span class="skill-tag">Ақпараттық технологиялар</span>
-            <span class="skill-tag">Ақпараттық қауіпсіздік</span>
-            <span class="skill-tag">Менеджмент</span>
-            <span class="skill-tag">Сыни ойлау</span>
-            <span class="skill-tag">Видеомонтаж</span>
-            <span class="skill-tag">Полиглот</span>
-            <span class="skill-tag">Ғылыми жазу</span>
-            <span class="skill-tag">Microsoft Office</span>
-            <span class="skill-tag">Тарих</span>
-            <span class="skill-tag">CSS</span>
-            <span class="skill-tag">HTML</span>
-            <span class="skill-tag">Python</span>
-            <span class="skill-tag">JavaScript</span>
-          </div>
-        </div>
-
-        <div class="section">
-          <div class="section-title">Тілдер</div>
-          <div class="lang-list">
-            <div class="lang-item">
-              <div class="lang-name">Қазақша</div>
-              <div class="lang-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div></div>
-              <div class="lang-level">Ана тілі</div>
-            </div>
-            <div class="lang-item">
-              <div class="lang-name">Орысша</div>
-              <div class="lang-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div></div>
-              <div class="lang-level">Еркін</div>
-            </div>
-            <div class="lang-item">
-              <div class="lang-name">Ағылшынша</div>
-              <div class="lang-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div></div>
-              <div class="lang-level">Кәсіби (C1)</div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div><!-- /kz -->
-
-  </div><!-- /card -->
-
-  <script>
-    function switchLang(lang) {
-      document.querySelectorAll('.lang-content').forEach(function(el) {
-        el.classList.remove('active');
-      });
-      document.querySelectorAll('.lang-btn').forEach(function(btn) {
-        btn.classList.remove('active');
-      });
-      document.getElementById('content-' + lang).classList.add('active');
-      document.getElementById('btn-' + lang).classList.add('active');
-    }
-  </script>
-</body>
-</html>
