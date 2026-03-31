@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bakhtiyar Maratuly — Resume</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Unbounded:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e0e;
+    --surface: #161616;
+    --border: #2a2a2a;
+    --accent: #c8f135;
+    --accent2: #3dffa0;
+    --text: #e8e8e8;
+    --muted: #888;
+    --tag-bg: #1e1e1e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    font-weight: 300;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Lang switcher */
+  .lang-bar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: flex-end;
+    gap: 2px;
+    padding: 12px 32px;
+    background: rgba(14,14,14,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .lang-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    padding: 6px 14px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    text-transform: uppercase;
+  }
+
+  .lang-btn:hover, .lang-btn.active {
+    background: var(--accent);
+    color: #000;
+    border-color: var(--accent);
+  }
+
+  /* Page */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 100px 32px 80px;
+  }
+
+  /* Header */
+  .header {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 40px;
+    align-items: start;
+    margin-bottom: 60px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--border);
+    filter: grayscale(20%);
+  }
+
+  .header-info {}
+
+  .name {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(28px, 4vw, 42px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+  }
+
+  .title {
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .contacts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .contacts a {
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .contacts a:hover { color: var(--accent); }
+
+  /* Sections */
+  .section {
+    margin-bottom: 52px;
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* About */
+  .about-text {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #bbb;
+    max-width: 680px;
+  }
+
+  /* Experience */
+  .job {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 24px;
+    margin-bottom: 36px;
+    padding-bottom: 36px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .job:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+  .job-meta {
+    padding-top: 2px;
+  }
+
+  .job-period {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    line-height: 1.6;
+  }
+
+  .job-company {
+    font-size: 11px;
+    color: var(--accent2);
+    margin-top: 4px;
+    letter-spacing: 0.05em;
+  }
+
+  .job-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+  }
+
+  .job-desc {
+    font-size: 13px;
+    line-height: 1.75;
+    color: #aaa;
+  }
+
+  .job-bullets {
+    margin-top: 8px;
+    padding-left: 0;
+    list-style: none;
+  }
+
+  .job-bullets li {
+    font-size: 13px;
+    line-height: 1.75;
+    color: #aaa;
+    padding-left: 16px;
+    position: relative;
+    margin-bottom: 4px;
+  }
+
+  .job-bullets li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 11px;
+    top: 2px;
+  }
+
+  /* Education */
+  .edu-item {
+    margin-bottom: 28px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .edu-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+  .edu-school {
+    font-family: 'DM Serif Display', serif;
+    font-size: 17px;
+    margin-bottom: 4px;
+  }
+
+  .edu-degree {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+
+  .edu-year {
+    font-size: 11px;
+    color: var(--accent);
+    margin-top: 4px;
+  }
+
+  /* Skills */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .skill-group {}
+
+  .skill-group-title {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .tag {
+    font-size: 11px;
+    padding: 4px 10px;
+    border: 1px solid var(--border);
+    color: #ccc;
+    letter-spacing: 0.05em;
+    transition: all 0.2s;
+  }
+
+  .tag:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* Languages */
+  .lang-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .lang-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 340px;
+  }
+
+  .lang-name {
+    font-size: 13px;
+    color: #ccc;
+  }
+
+  .lang-level {
+    font-size: 11px;
+    color: var(--accent2);
+    letter-spacing: 0.08em;
+  }
+
+  .lang-bar-track {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+    margin: 0 16px;
+    position: relative;
+  }
+
+  .lang-bar-fill {
+    height: 100%;
+    background: var(--accent);
+    position: absolute;
+    left: 0;
+  }
+
+  /* Animate on load */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-in {
+    animation: fadeUp 0.5s ease forwards;
+  }
+
+  @media (max-width: 600px) {
+    .container { padding: 88px 20px 60px; }
+    .header { grid-template-columns: 1fr; gap: 20px; }
+    .job { grid-template-columns: 1fr; gap: 8px; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .lang-bar { padding: 12px 16px; }
+    .lang-btn { padding: 5px 10px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="lang-bar">
+  <button class="lang-btn active" onclick="switchLang('en', this)">EN</button>
+  <button class="lang-btn" onclick="switchLang('ru', this)">RU</button>
+  <button class="lang-btn" onclick="switchLang('kz', this)">KZ</button>
+</div>
+
+<!-- ═══════════════════════════ ENGLISH ═══════════════════════════ -->
+<div class="page active" id="page-en">
+  <div class="container">
+
+    <div class="header fade-in">
+      <img class="avatar" src="https://media.licdn.com/dms/image/v2/D4E03AQFCYvwVpDhSzw/profile-displayphoto-scale_400_400/B4EZfLuxtnHsAg-/0/1751469727918?e=1774483200&v=beta&t=RIuKq3VSSrsYePjrJG-YSt3kYNPUljnYGC1MXyUOuYM" alt="Bakhtiyar Maratuly">
+      <div class="header-info">
+        <div class="name">Bakhtiyar Maratuly</div>
+        <div class="title">Cybersecurity Specialist &amp; IT Instructor</div>
+        <div class="contacts">
+          <span>📍 Oral, Kazakhstan</span>
+          <a href="/cdn-cgi/l/email-protection#5e3c3f35362a37273f2c333f2c3f2a2b32271e39333f3732703d3133"><span class="__cf_email__" data-cfemail="492b2822213d2030283b24283b283d3c2530092e24282025672a2624">[email&#160;protected]</span></a>
+          <a href="tel:+77782448796">+7 778 244-87-96</a>
+          <a href="https://www.linkedin.com/in/bakhtiyar-malikov-8a2810370" target="_blank">LinkedIn</a>
+          <a href="https://github.com/aeqzer" target="_blank">GitHub</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="section fade-in">
+      <div class="section-label">About</div>
+      <p class="about-text">
+        Cybersecurity professional with a Bachelor's in Information Security and a Master's in History. 
+        I combine technical rigour with strong analytical and research skills — the ability to investigate, 
+        trace patterns, and construct structured arguments. Currently working as an IT instructor, 
+        where I teach web development and programming fundamentals. Open to cybersecurity, IT audit, 
+        or security analyst roles in Europe. Fluent in English, Russian, and Kazakh.
+      </p>
+    </div>
+
+    <div class="section fade-in">
+      <div class="section-label">Experience</div>
+
+      <div class="job">
+        <div class="job-meta">
+          <div class="job-period">Oct 2025 — Present</div>
+          <div class="job-company">KiberOne</div>
+        </div>
+        <div>
+          <div class="job-title">IT Instructor</div>
+          <ul class="job-bullets">
+            <li>Teaching HTML, CSS, JavaScript, and Python to students aged 8–17</li>
+            <li>Designing structured lesson plans and practical assignments</li>
+            <li>Building and deploying educational web projects on GitHub Pages</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="job">
+        <div class="job-meta">
+          <div class="job-period">Jun 2025 — Sep 2025</div>
+          <div class="job-company">MSSP Global</div>
+        </div>
+        <div>
+          <div class="job-title">IT Auditor</div>
+          <ul class="job-bullets">
+            <li>Conducted IT compliance audits for municipal government clients in Astana</li>
+            <li>Assessed information systems against security and regulatory standards</li>
+            <li>Prepared structured audit reports with actionable recommendations</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="job">
+        <div class="job-meta">
+          <div class="job-period">Apr 2025 — Jun 2025</div>
+          <div class="job-company">JAS Education</div>
+        </div>
+        <div>
+          <div class="job-title">Sales Manager</div>
+          <ul class="job-bullets">
+            <li>Managed inbound and outbound calls promoting children's educational programs</li>
+            <li>Developed client communication scripts and handled objections</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="section fade-in">
+      <div class="section-label">Education</div>
+
+      <div class="edu-item">
+        <div class="edu-school">West Kazakhstan University (ЗКУ)</div>
+        <div class="edu-degree">Master's in History</div>
+        <div class="edu-year">2023 — 2025</div>
+      </div>
+
+      <div class="edu-item">
+        <div class="edu-school">Astana IT University</div>
+        <div class="edu-degree">Bachelor's in Cybersecurity</div>
+        <div class="edu-year">2018 — 2022</div>
+      </div>
+
+    </div>
+
+    <div class="section fade-in">
+      <div class="section-label">Skills</div>
+      <div class="skills-grid">
+        <div class="skill-group">
+          <div class="skill-group-title">Security &amp; IT</div>
+          <div class="skill-tags">
+            <span class="tag">Information Security</span>
+            <span class="tag">IT Audit</span>
+            <span class="tag">Risk Assessment</span>
+            <span class="tag">Compliance</span>
+            <span class="tag">TryHackMe</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">Development</div>
+          <div class="skill-tags">
+            <span class="tag">HTML / CSS</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">Python</span>
+            <span class="tag">GitHub</span>
+          </div>
+        </div>
+        <div class="skill-group" style="margin-top:16px">
+          <div class="skill-group-title">Other</div>
+          <div class="skill-tags">
+            <span class="tag">Academic Research</span>
+            <span class="tag">Technical Writing</span>
+            <span class="tag">Microsoft Office</span>
+            <span class="tag">Teaching</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section fade-in">
+      <div class="section-label">Languages</div>
+      <div class="lang-list">
+        <div class="lang-item">
+          <span class="lang-name">Kazakh</span>
+          <div class="lang-bar-track"><div class="lang-bar-fill" style="width:100%"></div></div>
+          <span class="lang-level">Native</span>
+        </div>
+        <div class="lang-item">
+          <span class="lang-name">Russian</span>
+          <div class="lang-bar-track"><div class="lang-bar-fill" style="width:100%"></div></div>
+          <span class="lang-level">Fluent</span>
+        </div>
+        <div class="lang-item">
+          <span class="lang-name">English</span>
+          <div class="lang-bar-track"><div class="lang-bar-fill" style="width:90%"></div></div>
+          <span class="lang-level">C1 Professional</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════ RUSSIAN ═══════════════════════════ -->
+<div class="page" id="page-ru">
+  <div class="container">
+
+    <div class="header fade-in">
+      <img class="avatar" src="https://media.licdn.com/dms/image/v2/D4E03AQFCYvwVpDhSzw/profile-displayphoto-scale_400_400/B4EZfLuxtnHsAg-/0/1751469727918?e=1774483200&v=beta&t=RIuKq3VSSrsYePjrJG-YSt3kYNPUljnYGC1MXyUOuYM" alt="Бахтияр Маратулы">
+      <div class="header-info">
+        <div class="name">Бахтияр Маратулы</div>
+        <div class="title">Специалист по кибербезопасности &amp; IT-преподаватель</div>
+        <div class="contacts">
+          <span>📍 Уральск, Казахстан</span>
+          <a href="/cdn-cgi/l/email-protection#bbd9dad0d3cfd2c2dac9d6dac9dacfced7c2fbdcd6dad2d795d8d4d6"><span class="__cf_email__" data-cfemail="cfadaea4a7bba6b6aebda2aebdaebbbaa3b68fa8a2aea6a3e1aca0a2">[email&#160;protected]</span></a>
+          <a href="tel:+77782448796">+7 778 244-87-96</a>
+          <a href="https://www.linkedin.com/in/bakhtiyar-malikov-8a2810370" target="_blank">LinkedIn</a>
+          <a href="https://github.com/aeqzer" target="_blank">GitHub</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="section fade-in">
+      <div class="section-label">Обо мне</div>
+      <p class="about-text">
+        Специалист в области кибербезопасности с дипломом бакалавра по информационной безопасности 
+        и степенью магистра истории. Сочетаю техническую грамотность с развитыми аналитическими 
+        и исследовательскими навыками. В настоящее время работаю IT-преподавателем — обучаю 
+        веб-разработке и основам программирования. Рассматриваю позиции в сфере кибербезопасности, 
+        IT-аудита или анализа информационной безопасности. Свободно владею казахским, русским и английским языками.
+      </p>
+    </div>
+
+    <div class="section fade-in">
+      <div class="section-label">Опыт работы</div>
+
+      <div class="job">
+        <div class="job-meta">
+          <div class="job-period">Окт 2025 — н.в.</div>
+          <div class="job-company">KiberOne</div>
+        </div>
+        <div>
+          <div class="job-title">IT-преподаватель</div>
+          <ul class="job-bullets">
+            <li>Обучаю HTML, CSS, JavaScript и Python детей и подростков 8–17 лет</li>
+            <li>Разрабатываю структурированные планы уроков и практические задания</li>
+            <li>Создаю и публикую учебные веб-проекты на GitHub Pages</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="job">
+        <div class="job-meta">
+          <div class="job-period">Июн 2025 — Сен 2025</div>
+          <div class="job-company">MSSP Global</div>
+        </div>
+        <div>
+          <div class="job-title">IT-аудитор</div>
+          <ul class="job-bullets">
+            <li>Проводил аудит соответствия ИТ-систем для государственных клиентов акимата Астаны</li>
+            <li>Оценивал информационные системы на соответствие стандартам безопасности и нормативным требованиям</li>
+            <li>Составлял структурированные аудиторские отчёты с конкретными рекомендациями</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="job">
+        <div class="job-meta">
+          <div class="job-period">Апр 2025 — Июн 2025</div>
+          <div class="job-company">JAS Education</div>
+        </div>
+        <div>
+          <div class="job-title">Менеджер по продажам</div>
+          <ul class="job-bullets">
+            <li>Вёл входящие и исходящие звонки по продвижению образовательных программ для детей</li>
+            <li>Разрабатывал скрипты общения с клиентами и отработку возражений</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="section fade-in">
+      <div class="section-label">Образование</div>
+
+      <div class="edu-item">
+        <div class="edu-school">Западно-Казахстанский университет им. М. Утемисова</div>
+        <div class="edu-degree">Магистр истории</div>
+        <div class="edu-year">2023 — 2025</div>
+      </div>
+
+      <div class="edu-item">
+        <div class="edu-school">Astana IT University</div>
+        <div class="edu-degree">Бакалавр по кибербезопасности</div>
+        <div class="edu-year">2018 — 2022</div>
+      </div>
+
+    </div>
+
+    <div class="section fade-in">
+      <div class="section-label">Навыки</div>
+      <div class="skills-grid">
+        <div class="skill-group">
+          <div class="skill-group-title">Безопасность &amp; IT</div>
+          <div class="skill-tags">
+            <span class="tag">Информационная безопасность</span>
+            <span class="tag">IT-аудит</span>
+            <span class="tag">Оценка рисков</span>
+            <span class="tag">Соответствие стандартам</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">Разработка</div>
+          <div class="skill-tags">
+            <span class="tag">HTML / CSS</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">Python</span>
+            <span class="tag">GitHub</span>
+          </div>
+        </div>
+        <div class="skill-group" style="margin-top:16px">
+          <div class="skill-group-title">Прочее</div>
+          <div class="skill-tags">
+            <span class="tag">Академические исследования</span>
+            <span class="tag">Техническое письмо</span>
+            <span class="tag">Microsoft Office</span>
+            <span class="tag">Преподавание</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section fade-in">
+      <div class="section-label">Языки</div>
+      <div class="lang-list">
+        <div class="lang-item">
+          <span class="lang-name">Казахский</span>
+          <div class="lang-bar-track"><div class="lang-bar-fill" style="width:100%"></div></div>
+          <span class="lang-level">Родной</span>
+        </div>
+        <div class="lang-item">
+          <span class="lang-name">Русский</span>
+          <div class="lang-bar-track"><div class="lang-bar-fill" style="width:100%"></div></div>
+          <span class="lang-level">Свободно</span>
+        </div>
+        <div class="lang-item">
+          <span class="lang-name">Английский</span>
+          <div class="lang-bar-track"><div class="lang-bar-fill" style="width:90%"></div></div>
+          <span class="lang-level">C1 — Профессиональный</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════ KAZAKH ═══════════════════════════ -->
+<div class="page" id="page-kz">
+  <div class="container">
+
+    <div class="header fade-in">
+      <img class="avatar" src="https://media.licdn.com/dms/image/v2/D4E03AQFCYvwVpDhSzw/profile-displayphoto-scale_400_400/B4EZfLuxtnHsAg-/0/1751469727918?e=1774483200&v=beta&t=RIuKq3VSSrsYePjrJG-YSt3kYNPUljnYGC1MXyUOuYM" alt="Бақтияр Маратұлы">
+      <div class="header-info">
+        <div class="name">Бақтияр Маратұлы</div>
+        <div class="title">Киберқауіпсіздік маманы &amp; IT оқытушысы</div>
+        <div class="contacts">
+          <span>📍 Орал, Қазақстан</span>
+          <a href="/cdn-cgi/l/email-protection#7113101a1905180810031c10031005041d0831161c10181d5f121e1c"><span class="__cf_email__" data-cfemail="6e0c0f05061a07170f1c030f1c0f1a1b02172e09030f0702400d0103">[email&#160;protected]</span></a>
+          <a href="tel:+77782448796">+7 778 244-87-96</a>
+          <a href="https://www.linkedin.com/in/bakhtiyar-malikov-8a2810370" target="_blank">LinkedIn</a>
+          <a href="https://github.com/aeqzer" target="_blank">GitHub</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="section fade-in">
+      <div class="section-label">Өзім туралы</div>
+      <p class="about-text">
+        Ақпараттық қауіпсіздік бакалавры және тарих магистрі дәрежесіне ие киберқауіпсіздік маманы. 
+        Техникалық білімді күшті аналитикалық және зерттеу дағдыларымен ұштастырамын. 
+        Қазіргі уақытта IT оқытушысы ретінде жұмыс істеп, веб-әзірлеу мен бағдарламалаудың 
+        негіздерін үйретемін. Еуропада киберқауіпсіздік, IT аудит немесе ақпараттық қауіпсіздік 
+        талдаушысы лауазымдарын қарастырамын. Қазақша, орысша және ағылшынша еркін сөйлеймін.
+      </p>
+    </div>
+
+    <div class="section fade-in">
+      <div class="section-label">Жұмыс тәжірибесі</div>
+
+      <div class="job">
+        <div class="job-meta">
+          <div class="job-period">Қаз 2025 — қазір</div>
+          <div class="job-company">KiberOne</div>
+        </div>
+        <div>
+          <div class="job-title">IT оқытушысы</div>
+          <ul class="job-bullets">
+            <li>8–17 жастағы оқушыларға HTML, CSS, JavaScript және Python үйретемін</li>
+            <li>Сабақ жоспарлары мен практикалық тапсырмаларды әзірлеймін</li>
+            <li>GitHub Pages-те оқу веб-жобаларын жасаймын және жариялаймын</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="job">
+        <div class="job-meta">
+          <div class="job-period">Мау 2025 — Қыр 2025</div>
+          <div class="job-company">MSSP Global</div>
+        </div>
+        <div>
+          <div class="job-title">IT аудиторы</div>
+          <ul class="job-bullets">
+            <li>Астана қалалық әкімдігінің мемлекеттік клиенттері үшін IT сәйкестік аудитін жүргіздім</li>
+            <li>Ақпараттық жүйелерді қауіпсіздік стандарттарына сәйкестігі бойынша бағаладым</li>
+            <li>Нақты ұсыныстары бар аудиторлық есептер дайындадым</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="job">
+        <div class="job-meta">
+          <div class="job-period">Сәу 2025 — Мау 2025</div>
+          <div class="job-company">JAS Education</div>
+        </div>
+        <div>
+          <div class="job-title">Сату менеджері</div>
+          <ul class="job-bullets">
+            <li>Балаларға арналған білім беру бағдарламаларын насихаттау бойынша кіріс және шығыс қоңыраулар жүргіздім</li>
+            <li>Клиенттермен байланыс сценарийлерін әзірледім</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="section fade-in">
+      <div class="section-label">Білім</div>
+
+      <div class="edu-item">
+        <div class="edu-school">М. Өтемісов атындағы Батыс Қазақстан университеті</div>
+        <div class="edu-degree">Тарих магистрі</div>
+        <div class="edu-year">2023 — 2025</div>
+      </div>
+
+      <div class="edu-item">
+        <div class="edu-school">Astana IT University</div>
+        <div class="edu-degree">Киберқауіпсіздік бакалавры</div>
+        <div class="edu-year">2018 — 2022</div>
+      </div>
+
+    </div>
+
+    <div class="section fade-in">
+      <div class="section-label">Дағдылар</div>
+      <div class="skills-grid">
+        <div class="skill-group">
+          <div class="skill-group-title">Қауіпсіздік &amp; IT</div>
+          <div class="skill-tags">
+            <span class="tag">Ақпараттық қауіпсіздік</span>
+            <span class="tag">IT аудит</span>
+            <span class="tag">Тәуекелді бағалау</span>
+            <span class="tag">Стандарттарға сәйкестік</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">Әзірлеу</div>
+          <div class="skill-tags">
+            <span class="tag">HTML / CSS</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">Python</span>
+            <span class="tag">GitHub</span>
+          </div>
+        </div>
+        <div class="skill-group" style="margin-top:16px">
+          <div class="skill-group-title">Басқа</div>
+          <div class="skill-tags">
+            <span class="tag">Ғылыми зерттеу</span>
+            <span class="tag">Техникалық жазу</span>
+            <span class="tag">Microsoft Office</span>
+            <span class="tag">Оқыту</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section fade-in">
+      <div class="section-label">Тілдер</div>
+      <div class="lang-list">
+        <div class="lang-item">
+          <span class="lang-name">Қазақша</span>
+          <div class="lang-bar-track"><div class="lang-bar-fill" style="width:100%"></div></div>
+          <span class="lang-level">Ана тілі</span>
+        </div>
+        <div class="lang-item">
+          <span class="lang-name">Орысша</span>
+          <div class="lang-bar-track"><div class="lang-bar-fill" style="width:100%"></div></div>
+          <span class="lang-level">Еркін</span>
+        </div>
+        <div class="lang-item">
+          <span class="lang-name">Ағылшынша</span>
+          <div class="lang-bar-track"><div class="lang-bar-fill" style="width:90%"></div></div>
+          <span class="lang-level">C1 — Кәсіби</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  function switchLang(lang, btn) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('page-' + lang).classList.add('active');
+    btn.classList.add('active');
+  }
